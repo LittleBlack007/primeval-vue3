@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "ant-design-vue": "^3.0.0-alpha.14",
+    "babel-plugin-import": "^1.13.3",
     "core-js": "^3.6.5",
     "vue": "^3.0.0"
   },
