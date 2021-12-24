@@ -1,5 +1,4 @@
 export default {
-  tooltipLeaveIs:false,
   // 指令所在组件VNode 及其 Vnode前部更新后调用
   mounted(el){
     // 创建一个容器，获取该组件内的内容
@@ -13,8 +12,6 @@ export default {
     const realWidth = textSpan.offsetWidth;
     // 过河拆桥 把用来度量长度的textSpan从body中移除
     document.body.removeChild(textSpan);
-    console.log(realWidth,el.offsetWidth)
-    console.log(el);
     
     if(realWidth > el.offsetWidth){  // 文字有被隐藏（文字真正宽度 大于 当前容器的宽度）
       // 给当前元素设置超出隐藏
@@ -32,10 +29,9 @@ export default {
 
 function showTooltip(el){
   let tooltipLeaveIs = Symbol('tooltipLeaveIs');
-  el[tooltipLeaveIs] = false;
   // 鼠标移入计算是否 展示全部文字内容
   el.onmouseenter = e => {
-    console.log(e)
+    el[tooltipLeaveIs] = false;
     // 创建一个容器，获取该组件内的内容
     // const currentStyle = window.getComputedStyle(el, ''); // 获取当前元素的style
     const box = document.createElement('div');  // 创建一个容器记录文字的宽度
@@ -47,9 +43,6 @@ function showTooltip(el){
     const realWidth = box.offsetWidth;
     // 过河拆桥 把用来度量长度的textSpan从body中移除
     document.body.removeChild(box);
-    console.log(realWidth,el.offsetWidth)
-    console.dir(box);
-    console.dir(el)
     
     if(realWidth > el.offsetWidth){  // 文字有被隐藏（文字真正宽度 大于 当前容器的宽度）
       // 给当前元素设置超出隐藏
@@ -63,7 +56,7 @@ function showTooltip(el){
         position: absolute;
         top: ${e.pageY + 5}px;
         left: ${e.pageX}px;
-        padding: 10px;
+        padding: 4px;
         color: #fff;
         background: rgba(0,0,0,0.6);
         border-radius: 5px;
